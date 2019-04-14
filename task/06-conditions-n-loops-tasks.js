@@ -30,7 +30,20 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 3 === 0 && num % 5 === 0) {
+        return 'FizzBuzz';
+    };
+
+    if (num % 3 === 0 ) {
+        return 'Fizz';
+    };
+
+    if (num % 5 === 0 ) {
+        return 'Buzz';
+    }
+
+    return num;
+
 }
 
 
@@ -46,7 +59,13 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    let fac = 1;
+
+    for (let i = 1; i <= n; i++ ) {
+        fac = fac * i;
+    }
+
+    return fac;
 }
 
 
@@ -63,7 +82,15 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let result = n1;
+    let i = n1;
+
+    while (i < n2) {
+        i++;
+        result += i;
+    }
+
+    return result;
 }
 
 
@@ -82,7 +109,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return (a + b > c && a + c > b && b + c > a);
 }
 
 
@@ -151,6 +178,10 @@ function doRectanglesOverlap(rect1, rect2) {
  */
 function isInsideCircle(circle, point) {
     throw new Error('Not implemented');
+    // let tempCalc = Math.pow( (point.x - circle.center.x), 2 ) + Math.pow( (point.y - circle.center.y), 2 );
+    // let sqrRadius = Math.pow(circle.radius, 2);
+    
+    // return ( tempCalc <= sqrRadius);
 }
 
 
@@ -209,7 +240,13 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    let newStr = ''
+
+    for (let i = str.length - 1; i >= 0; i--) {
+        newStr = newStr + str[i];
+    }
+
+    return newStr;
 }
 
 
@@ -226,7 +263,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return +( ('' +num).split('').reverse().join('') );
 }
 
 
