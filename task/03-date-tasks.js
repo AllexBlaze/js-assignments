@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(Date.parse(value));
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return new Date(Date.parse(value));
 }
 
 
@@ -56,7 +56,7 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+  return new Date(date.getFullYear(), 1, 29).getMonth() === 1;
 }
 
 
@@ -76,7 +76,30 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+  const diff = endDate - startDate;
+  let hours = Math.floor(diff / 3600000);
+  let min = Math.floor((diff % 3600000) / 60000);
+  let sec = Math.floor((diff % 60000) / 1000);
+  let mil = Math.floor((diff % 1000));
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (min < 10) {
+    min = `0${min}`;
+  }
+  if (sec < 10) {
+    sec = `0${sec}`;
+  }
+  if (mil < 10) {
+    mil = `00${mil}`;
+  }
+  if (mil >= 10 && mil < 100) {
+    mil = `0${mil}`;
+  }
+  if (mil >= 100) {
+    mil = `${mil}`;
+  }
+  return `${hours}:${min}:${sec}.${mil}`;
 }
 
 
@@ -94,7 +117,14 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+  const dateMilliseconds = Date.parse(date);
+  const dateUTC = new Date(dateMilliseconds);
+  let hours = dateUTC.getUTCHours();
+  const minutes = dateUTC.getUTCMinutes();
+  hours = hours > 12 ? hours - 12 : hours;
+  let angle = Math.abs(0.5 * (60 * hours - 11 * minutes));
+  angle = angle > 180 ? 360 - angle : angle;
+  return (angle * Math.PI) / 180;
 }
 
 
